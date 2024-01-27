@@ -151,6 +151,17 @@ class MainConverter
     }
 
     /**
+     * @param  int|null  $id
+     * @return string|null
+     */
+    public function convertToWindDirectionName(?int $id): ?string
+    {
+        $windDirections = array_column($this->windDirections, 'name', 'id');
+
+        return $windDirections[$id] ?? null;
+    }
+
+    /**
      * @param  string|null  $value
      * @return int|null
      */
@@ -328,16 +339,5 @@ class MainConverter
         $weathers = array_column($this->weathers, 'name', 'id');
 
         return $weathers[$id] ?? null;
-    }
-
-    /**
-     * @param  int|null  $id
-     * @return string|null
-     */
-    public function convertToWindDirectionName(?int $id): ?string
-    {
-        $windDirections = array_column($this->windDirections, 'name', 'id');
-
-        return $windDirections[$id] ?? null;
     }
 }
