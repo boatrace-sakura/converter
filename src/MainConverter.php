@@ -94,7 +94,7 @@ class MainConverter
     public function convertToName(?string $value): ?string
     {
         $pattern = '/[\\x0-\x20\x7f\xc2\xa0\xe3\x80\x80]++/u';
-        $subject = $this->convertToString($value);
+        $subject = $this->convertToString($value) ?? '';
         $array = preg_split($pattern, $subject, -1, PREG_SPLIT_NO_EMPTY) + [1 => ''];
         return is_null($value) ? null : implode(' ', $array);
     }
@@ -123,10 +123,10 @@ class MainConverter
      */
     public function convertToStartTiming(?string $value): ?float
     {
-        return match (substr($value = $this->convertToString($value), 0, 1)) {
-            'F' => $this->convertToFloat(-1),
-            'L' => $this->convertToFloat(1),
-            default => is_null($value) ? null : $this->convertToFloat(
+        return match (substr($value = $this->convertToString($value) ?? '', 0, 1)) {
+            'F' => $this->convertToFloat('-1'),
+            'L' => $this->convertToFloat('1'),
+            default => $value === '' ? null : $this->convertToFloat(
                 sprintf('%d%s', 0, preg_replace('/[^0-9.]/', '', $value))
             ),
         };
@@ -147,9 +147,7 @@ class MainConverter
      */
     public function convertToWindDirection(?string $value): ?int
     {
-        preg_match('/is-wind(\d+)/', $this->convertToString($value), $matches);
-
-        return $matches[1] ?? null;
+        return preg_match('/is-wind(\d+)/', $this->convertToString($value) ?? '', $matches) ? (int) $matches[1] : null;
     }
 
     /**
