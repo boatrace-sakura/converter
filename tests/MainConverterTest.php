@@ -15,7 +15,7 @@ class MainConverterTest extends PHPUnitTestCase
     /**
      * @var \Boatrace\Sakura\MainConverter
      */
-    protected $converter;
+    protected MainConverter $converter;
 
     /**
      * @return void

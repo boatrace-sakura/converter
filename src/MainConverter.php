@@ -14,7 +14,7 @@ class MainConverter
     /**
      * @var array
      */
-    protected $properties = [];
+    protected array $properties = [];
 
     /**
      * @return void

@@ -15,12 +15,12 @@ class Converter
     /**
      * @var \Boatrace\Sakura\Converter
      */
-    protected static $instance;
+    protected static Converter $instance;
 
     /**
      * @var \DI\Container
      */
-    protected static $container;
+    protected static Container $container;
 
     /**
      * @param  \Boatrace\Sakura\MainConverter  $converter
